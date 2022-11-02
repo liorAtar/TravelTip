@@ -29,6 +29,23 @@ nav{
 .main-content{
     grid-area: main;
     background-color: lightcoral;
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    grid-template-areas: 'weather map' 
+                        'locations map';
+}
+#map{
+    grid-area: map;
+}
+.locations-container{
+    grid-area: locations;
+    border: 3px solid black;
+}
+
+.weather-container{
+    grid-area: weather;
+    border: 3px solid black;
 }
 
 footer{

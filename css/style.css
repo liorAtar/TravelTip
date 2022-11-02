@@ -52,5 +52,13 @@ nav{
 
 footer{
     grid-area: footer;
-    background-color: lightblue
+    background-color: lightblue;
+}
+
+@media (max-width:760px) {
+    .main-content{
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.1fr 0.8fr 0.1fr;
+        grid-template-areas: 'weather' 'map' 'locations';
+    }
 }

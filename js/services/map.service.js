@@ -62,4 +62,5 @@ function onGoRequestedPlace(placeId) {
     const { lat, lng } = locService.getPlaceById(placeId)
     gMap.setCenter({ lat, lng })
     gMap.setZoom(20)
+    return { lat , lng }
 }

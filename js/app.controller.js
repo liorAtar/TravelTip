@@ -107,7 +107,8 @@ function renderLocations() {
 }
 
 function onGoToPlace(placeId) {
-    mapService.onGoRequestedPlace(placeId)
+    let pos = mapService.onGoRequestedPlace(placeId)
+    setQueryParams(pos)
 }
 
 function onRemovePlace(placeId) {
@@ -117,9 +118,8 @@ function onRemovePlace(placeId) {
 }
 
 
-function setQueryParams() {
-    let currPos = null
-    const queryStringParams = `lat=${currPos.lat}&lng=${currPos.lng}`
+function setQueryParams({lat,lng}) {
+    const queryStringParams = `lat=${lat}&lng=${lng}`
     const newUrl = window.location.protocol + '//' + window.location.host +   window.location.pathname + queryStringParams
     window.history.pushState({ path: newUrl }, '', newUrl)
 }

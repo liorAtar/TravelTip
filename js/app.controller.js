@@ -19,7 +19,8 @@ function onInit() {
         .then(() => {
             console.log('Map is ready')
             renderMarkers()
-            weatherService.getLocationWeather(lat, lng).then(res => weatherController.onUpdateWeather(res.data.sys.country, res.data.main.temp, res.data.weather[0].description))
+            weatherService.getLocationWeather(lat, lng)
+            .then(res => weatherController.onUpdateWeather(res.data.sys.country, res.data.main.temp, res.data.weather[0].description))
             clickMapLocEvent()
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -49,11 +50,11 @@ function onGetLocs() {
 function onGetUserPos() {
     getPosition()
         .then(pos => {
-            console.log('User position is:', pos.coords)
-            document.querySelector('.user-pos').innerText =
-                `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
             mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude })
             mapService.onZoomMap(pos.coords.latitude, pos.coords.longitude)
+            locService.addLoc('My Location', pos.coords.latitude, pos.coords.longitude)
+            renderMarkers()
+            renderLocations()
         })
         .catch(err => {
             console.log('err!!!', err)
@@ -69,10 +70,14 @@ function clickMapLocEvent() {
     //Add new place on map click 
     mapService.getMap().addListener('click', ev => {
         const name = prompt('Place name?', 'New Place')
-        const lat = ev.latLng.lat()
-        const lng = ev.latLng.lng()
-        mapService.addMarker({ lat, lng })
-        locService.addLoc(name, lat, lng)
+        if (name) {
+            const lat = ev.latLng.lat()
+            const lng = ev.latLng.lng()
+            mapService.addMarker({ lat, lng })
+            locService.addLoc(name, lat, lng)
+            renderMarkers()
+            renderLocations()
+        }
     })
 }
 

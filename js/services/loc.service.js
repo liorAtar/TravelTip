@@ -27,7 +27,8 @@ function getPlaceById(placeId) {
 }
 
 function removePlace(placeId) {
-    // locs.filter(p => p.id !== placeId)
+    const idx = locs.findIndex(p => p.id !== placeId)
+    locs.splice(idx, 1)
 }
 
 function makeId(length = 6) {

@@ -1,6 +1,5 @@
 window.onSearchLocation = onSearchLocation
 
-
 const GEO_API = 'AIzaSyAn_Ij60OAOhlvDr-QtD_Ih-JHFtzPdV6o'
 
 function onSearchLocation(){
@@ -13,6 +12,6 @@ function onSearchLocation(){
 function getLocation(address){
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEO_API}`
     const prm1 = fetch(url)
-    .then(res => console.log(res.url))
-
+    .then(res => fetch(res.url))
+    .then(console.log)
 }

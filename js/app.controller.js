@@ -11,6 +11,7 @@ function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready')
+            renderMarkers()
             clickMapLocEvent()
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -62,5 +63,26 @@ function clickMapLocEvent() {
         const lng = ev.latLng.lng()
         mapService.addMarker({ lat, lng })
         locService.addLoc(name, lat, lng)
+    })
+}
+
+function renderMarkers() {
+    locService.getLocs().then(locs => {
+        // remove previous markers
+        locs.forEach(loc => new google.maps.Marker({
+            position: { lat: loc.lat, lng: loc.lng },
+            map: mapService.getMap(),
+            title: loc.name
+        }).setMap(null))
+
+        // create a marker for every place
+        locs.map(({ name, lat, lng }) => {
+            const coord = { lat, lng }
+            return new google.maps.Marker({
+                position: coord,
+                map: mapService.getMap(),
+                title: name
+            })
+        })
     })
 }

@@ -11,7 +11,5 @@ function onSearchLocation(){
 
 function getLocation(address){
     const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEO_API}`
-    const prm1 = fetch(url)
-    .then(res => fetch(res.url))
-    .then(console.log)
+    return axios.get(url).then(res => axios.get(res.url).then(resd.coord))
 }

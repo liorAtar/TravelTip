@@ -93,7 +93,7 @@ function renderMarkers() {
     })
 }
 
-function renderLocations(){
+function renderLocations() {
     console.log('render')
     locService.getLocs().then(locs => {
         return locs.map(loc =>
@@ -115,3 +115,19 @@ function onRemovePlace(placeId) {
     renderMarkers()
     renderLocations()
 }
+
+
+function setQueryParams() {
+    let currPos = null
+    const queryStringParams = `lat=${currPos.lat}&lng=${currPos.lng}`
+    const newUrl = window.location.protocol + '//' + window.location.host +   window.location.pathname + queryStringParams
+    window.history.pushState({ path: newUrl }, '', newUrl)
+}
+
+function renderPageByQueryStringParams() {
+    const queryStringParams = new URLSearchParams(window.location.search)
+    let lat = +queryStringParams.get('lat')
+    let lng = +queryStringParams.get('lng')
+    //goTo(lat,lng)
+}
+  

@@ -93,11 +93,14 @@ function renderMarkers() {
 
 function renderLocations(){
     console.log('render')
-    locService.getLocs().then(locs => console.log(locs))
+    locService.getLocs().then(locs => {
+        return locs.map(loc =>
+            `<ul>${loc.name} <button>GO</button> <button>X</button> </ul>`
+        )
+    }
+    ).then(str => {
+        let elTable = document.querySelector('.locations-table')
+        elTable.innerHTML = str.join('')
+    })
 }
-        // // remove previous markers
-        // locs.forEach(loc => new google.maps.Marker({
-        //     position: { lat: loc.lat, lng: loc.lng },
-        //     map: mapService.getMap(),
-        //     title: loc.name
-        // }).setMap(null))
+

@@ -6,7 +6,8 @@ export const mapService = {
     addMarker,
     panTo,
     getMap,
-    onGoRequestedPlace
+    onGoRequestedPlace,
+    onZoomMap
 }
 
 // Var that is used throughout this Module (not global)
@@ -60,7 +61,11 @@ function _connectGoogleApi() {
 
 function onGoRequestedPlace(placeId) {
     const { lat, lng } = locService.getPlaceById(placeId)
-    gMap.setCenter({ lat, lng })
-    gMap.setZoom(20)
+    onZoomMap(lat, lng)
     return { lat , lng }
+}
+
+function onZoomMap(lat, lng){
+    gMap.setCenter(new google.maps.LatLng(lat,lng))
+    gMap.setZoom(15)
 }

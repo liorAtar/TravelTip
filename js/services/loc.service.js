@@ -4,8 +4,8 @@ export const locService = {
 }
 
 const locs = [
-    { name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
-    { name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
+    {id:makeId(), name: 'Greatplace', lat: 32.047104, lng: 34.832384 },
+    {id:makeId(), name: 'Neveragain', lat: 32.047201, lng: 34.832581 }
 ]
 
 function getLocs() {
@@ -17,5 +17,14 @@ function getLocs() {
 }
 
 function addLoc(name, lat, lng) {
-    locs.unshift({ name, lat, lng})
+    locs.unshift({ id:makeId(), name, lat, lng})
+}
+
+function makeId(length = 6) {
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    var txt = ''
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+    return txt
 }

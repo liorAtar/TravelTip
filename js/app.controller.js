@@ -8,7 +8,9 @@ window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 
+
 function onInit() {
+    renderLocations()
     mapService.initMap()
         .then(() => {
             console.log('Map is ready')
@@ -88,3 +90,14 @@ function renderMarkers() {
         })
     })
 }
+
+function renderLocations(){
+    console.log('render')
+    locService.getLocs().then(locs => console.log(locs))
+}
+        // // remove previous markers
+        // locs.forEach(loc => new google.maps.Marker({
+        //     position: { lat: loc.lat, lng: loc.lng },
+        //     map: mapService.getMap(),
+        //     title: loc.name
+        // }).setMap(null))

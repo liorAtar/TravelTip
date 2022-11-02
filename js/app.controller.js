@@ -11,6 +11,7 @@ function onInit() {
     mapService.initMap()
         .then(() => {
             console.log('Map is ready')
+            clickMapLocEvent()
         })
         .catch(() => console.log('Error: cannot init map'))
 }
@@ -47,7 +48,19 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
+
 function onPanTo() {
     console.log('Panning the Map')
     mapService.panTo(35.6895, 139.6917)
+}
+
+function clickMapLocEvent() {
+    //Add new place on map click 
+    mapService.getMap().addListener('click', ev => {
+        const name = prompt('Place name?', 'New Place')
+        const lat = ev.latLng.lat()
+        const lng = ev.latLng.lng()
+        mapService.addMarker({ lat, lng })
+        locService.addLoc(name, lat, lng)
+    })
 }

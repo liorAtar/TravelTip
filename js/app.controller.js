@@ -1,6 +1,7 @@
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
 import { weatherService } from './services/weather.service.js'
+import { weatherController } from './weather.controller.js'
 
 window.onload = onInit
 window.onAddMarker = onAddMarker
@@ -15,7 +16,7 @@ function onInit() {
         .then(() => {
             console.log('Map is ready')
             renderMarkers()
-            weatherService.getLocationWeather()
+            weatherService.getLocationWeather().then(res => weatherController.onUpdateWeather(res.data.sys.country, res.data.main.temp, res.data.weather[0].description))
             clickMapLocEvent()
         })
         .catch(() => console.log('Error: cannot init map'))

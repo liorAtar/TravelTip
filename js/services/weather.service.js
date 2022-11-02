@@ -10,4 +10,3 @@ function getLocationWeather(lat = 32.0749831, lon = 34.9120554) {
             console.log('res.data', res.data)
         )
 }
-

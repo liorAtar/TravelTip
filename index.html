@@ -1,55 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>TravelTip</title>
 </head>
+
 <body>
-<div class="main-layout">
-    <nav><h1>TravelTip</h1></nav>
-    <div class="main-controller">
-        <div class="search-container">
-            <input type="text" class="search-input">
-            <button onclick="onSearchLocation()">GO</button>
+    <div class="main-layout">
+        <nav>
+            <h1 class="logo">TravelTip</h1>
+        </nav>
+        <div class="main-controller">
+            <div class="search-container">
+                <input type="text" class="search-input">
+                <button onclick="onSearchLocation()">GO</button>
+                <button onclick="onCopyLink()">Copy</button>
+            </div>
+            <div class="controller-btns">
+                <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
+                <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
+                <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
+                <button onclick="onPanTo()" class="btn-pan">Pan Map to Tokyo</button>
+            </div>
         </div>
-        <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-        <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-        <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-        <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
-        <p>You are at: <span class="user-pos"></span></p>
-        <p>Locations: 
-            <pre class="locs"></pre>
-        </p>
-    </div>
-    <div class="main-content">
-        <div id="map" style="width: 100%; height: 400px;"></div>
-        <div class="weather-container">
-            <h2>weather Today</h2>
-            <div class="weather-info"></div>
+        <div class="main-content">
+            <div id="map" style="width: 100%; height: 100%;"></div>
+            <div class="weather-container">
+                <h2>weather Today</h2>
+                <div class="weather-info"></div>
+            </div>
+            <div class="locations-container">
+                <ul class="locations-table"></ul>
+            </div>
         </div>
-        <div class="locations-container"><ul class="locations-table"></ul></div>
+        <footer>
+            <h2>copyrights 2022</h2>
+        </footer>
     </div>
-    <footer><h2>footer</h2></footer>
-</div>
 
-
-    <!-- <h1>TravelTip Starter</h1>
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <button onclick="onAddMarker()" class="btn-add-marker">Add Marker Speific Location</button>
-    <button onclick="onGetUserPos()" class="btn-user-pos">Get User Position</button>
-    <button onclick="onGetLocs()" class="btn-get-locs">Get Locations</button>
-    <button onclick="onPanTo()"class="btn-pan">Pan Map to Tokyo</button>
-
-    <p>You are at: <span class="user-pos"></span></p>
-    <p>Locations: 
-        <pre class="locs"></pre>
-    </p> -->
-    <!-- <script src="utils.js"></script> -->
     <script src="lib/axios.js"></script>
     <script type="module" src="api.js"></script>
     <script type="module" src="js/geo.controller.js"></script>
     <script type="module" src="js/app.controller.js"></script>
 </body>
+
 </html>

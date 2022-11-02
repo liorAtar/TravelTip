@@ -17,7 +17,7 @@ function getMap() {
     return gMap
 }
 
-function initMap(lat = 32.0749831, lng = 34.9120554) {
+function initMap(lat,lng) {
     console.log('InitMap')
     return _connectGoogleApi()
         .then(() => {

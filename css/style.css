@@ -2,68 +2,134 @@
     box-sizing: border-box;
 }
 
-body{
-    height: 100vh;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
 }
+
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #EAEAEA;
+}
+
+
+
+/* MAIN-LAYOUT */
 
 .main-layout{
     margin-right: auto;
     margin-left: auto;
-    max-width: 1560px;
     height: 100%;
-    background-color: beige;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 0.1fr 0.2fr 0.6fr 0.1fr;
     grid-template-areas: 'nav' 'controller' 'main' 'footer';
 }
 
+/* NAV */
+
 nav{
     grid-area: nav;
-    background-color: green;
 }
+.logo{
+    background-color: #3C4048;
+    text-align: center;
+    font-size: 70px;
+}
+
+/* default div design */
+
+.locations-container, .weather-container, .main-controller{
+    padding: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+    -moz-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 1px 3px;
+}
+
+/* CONTROLLER */
 
 .main-controller{
     grid-area: controller;
-    background-color: aquamarine;
+    display: grid;
+    text-align: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 0.5fr;
+    grid-template-areas: 'search' 'controller';
+}       
+
+.search-container{
+    grid-area: search;
 }
 
+.search-container button{
+    padding: 15px;
+}
+
+.search-input{
+    font-size: 2rem;
+}
+
+.controller-btns{
+    margin-top: auto;
+    margin-bottom: auto;
+    grid-area: controller;
+}
+
+.controller-btns *{
+    border-radius: 15px;
+    padding: 10px;
+}
+
+
+/* CONTENT */
 .main-content{
     grid-area: main;
-    background-color: lightcoral;
     display: grid;
     grid-template-columns: 0.4fr 0.6fr;
     grid-template-rows: 0.5fr 0.5fr;
     grid-template-areas: 'weather map' 
                         'locations map';
 }
+
 #map{
     grid-area: map;
 }
+
 .locations-container{
+    background-color: #B2B2B2;
     grid-area: locations;
-    border: 3px solid black;
+    text-align: left;
 }
 
 .weather-container{
+    background-color: #EAEAEA;
     grid-area: weather;
-    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
 }
+
+/* FOOTER */
 
 footer{
+    background-color: #3C4048;
     grid-area: footer;
-    background-color: lightblue;
+    text-align: center;
 }
 
+/* responsive */
+
 @media (max-width:760px) {
-    .main-layout{
-        grid-template-columns: 1fr;
-        grid-template-rows: 0.1fr 0.2fr 0.6fr 0.1fr;
-        grid-template-areas: 'nav' 'controller' 'main' 'footer';
-    }
     .main-content{
         grid-template-columns: 1fr;
-        grid-template-rows: 0.1fr 0.8fr 0.1fr;
+        grid-template-rows: 0.1fr 0.8fr 0.2fr;
         grid-template-areas: 'weather' 'map' 'locations';
     }
 }

@@ -10,14 +10,16 @@ window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
 window.onGoToPlace = onGoToPlace
 window.onRemovePlace = onRemovePlace
+window.onCopyLink = onCopyLink
 
 function onInit() {
+    let { lat, lng } = renderPageByQueryStringParams() || { lat: 32.0749831, lng: 34.9120554 }
     renderLocations()
-    mapService.initMap()
+    mapService.initMap(lat, lng)
         .then(() => {
             console.log('Map is ready')
             renderMarkers()
-            weatherService.getLocationWeather().then(res => weatherController.onUpdateWeather(res.data.sys.country, res.data.main.temp, res.data.weather[0].description))
+            weatherService.getLocationWeather(lat, lng).then(res => weatherController.onUpdateWeather(res.data.sys.country, res.data.main.temp, res.data.weather[0].description))
             clickMapLocEvent()
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -50,8 +52,8 @@ function onGetUserPos() {
             console.log('User position is:', pos.coords)
             document.querySelector('.user-pos').innerText =
                 `Latitude: ${pos.coords.latitude} - Longitude: ${pos.coords.longitude}`
-                mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude })
-                mapService.onZoomMap(pos.coords.latitude, pos.coords.longitude)
+            mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+            mapService.onZoomMap(pos.coords.latitude, pos.coords.longitude)
         })
         .catch(err => {
             console.log('err!!!', err)
@@ -120,9 +122,9 @@ function onRemovePlace(placeId) {
 }
 
 
-function setQueryParams({lat,lng}) {
-    const queryStringParams = `lat=${lat}&lng=${lng}`
-    const newUrl = window.location.protocol + '//' + window.location.host +   window.location.pathname + queryStringParams
+function setQueryParams({ lat, lng }) {
+    const queryStringParams = `?lat=${lat}&lng=${lng}`
+    const newUrl = window.location.protocol + '//' + window.location.host + window.location.pathname + queryStringParams
     window.history.pushState({ path: newUrl }, '', newUrl)
 }
 
@@ -130,6 +132,13 @@ function renderPageByQueryStringParams() {
     const queryStringParams = new URLSearchParams(window.location.search)
     let lat = +queryStringParams.get('lat')
     let lng = +queryStringParams.get('lng')
-    //goTo(lat,lng)
+    return { lat, lng }
 }
-  
+
+function onCopyLink() {
+    // Get the text field
+    const link = window.location.href;
+    console.log(link)
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(link).then(() => alert('copy!'))
+}

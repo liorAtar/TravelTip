@@ -8,7 +8,7 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
-
+window.onGoToPlace = onGoToPlace
 
 function onInit() {
     renderLocations()
@@ -96,7 +96,7 @@ function renderLocations(){
     console.log('render')
     locService.getLocs().then(locs => {
         return locs.map(loc =>
-            `<ul>${loc.name} <button>GO</button> <button>X</button> </ul>`
+            `<ul>${loc.name} <button onclick="onGoToPlace('${loc.id}')">GO</button> <button>X</button> </ul>`
         )
     }
     ).then(str => {
@@ -105,3 +105,6 @@ function renderLocations(){
     })
 }
 
+function onGoToPlace(placeId) {
+    mapService.onGoRequestedPlace(placeId)
+}

@@ -1,6 +1,7 @@
 export const locService = {
     getLocs,
-    addLoc
+    addLoc,
+    getPlaceById
 }
 
 const locs = [
@@ -18,6 +19,10 @@ function getLocs() {
 
 function addLoc(name, lat, lng) {
     locs.unshift({ id:makeId(), name, lat, lng})
+}
+
+function getPlaceById(placeId) {
+    return locs.find(p => p.id === placeId)
 }
 
 function makeId(length = 6) {

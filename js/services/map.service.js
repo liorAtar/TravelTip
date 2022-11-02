@@ -1,10 +1,12 @@
 import { Api } from "../../api.js"
+import { locService } from "./loc.service.js"
 
 export const mapService = {
     initMap,
     addMarker,
     panTo,
-    getMap
+    getMap,
+    onGoRequestedPlace
 }
 
 // Var that is used throughout this Module (not global)
@@ -54,4 +56,10 @@ function _connectGoogleApi() {
         elGoogleApi.onload = resolve
         elGoogleApi.onerror = () => reject('Google script failed to load')
     })
+}
+
+function onGoRequestedPlace(placeId) {
+    const { lat, lng } = locService.getPlaceById(placeId)
+    gMap.setCenter({ lat, lng })
+    gMap.setZoom(20)
 }
